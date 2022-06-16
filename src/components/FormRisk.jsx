@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -116,19 +117,12 @@ const FormRisk = () => {
 
   }, [selected]);
 
-
-  // approveClick
-  const approvClick = () => {
-
-  };
-
-
   return (
     <Container className='h-100'>
       <div class="h-25"></div>
       <Row className="justify-content-md-center">
         <Col md="6">
-          <Form>
+          <Form >
             {data.questions.map( question => {
               return (
                 <Form.Group as={Row} className="mb-5" key={question.id} controlId={question.id} >
@@ -177,7 +171,7 @@ const FormRisk = () => {
             })}
 
             <div class="justify-content-center">
-              <Button className='align-middle' variant="primary" type="submit" onClick={approvClick}>
+              <Button className='align-middle' variant="primary" type="submit">
                 Zatwierdź
               </Button>
             </div>
