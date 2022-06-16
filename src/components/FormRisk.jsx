@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 const FormRisk = () => {
 
+  // questions
   const data = {
     questions: [
       {
@@ -76,7 +77,7 @@ const FormRisk = () => {
       },
       {
         id: "q7",
-        q: "7.Czasami ryzykuję po to, aby poczuć „adrenalinę”, bo to ona sprawia, że wtedy czuję, że naprawdę żyję.",
+        q: "7. Czasami ryzykuję po to, aby poczuć „adrenalinę”, bo to ona sprawia, że wtedy czuję, że naprawdę żyję.",
         name: "q7-a",
         a1: "Prawda",
         a2: "Raczej prawda",
@@ -87,42 +88,56 @@ const FormRisk = () => {
     ]
   };
 
-  const collectAnswers = {
-    q1: '',
-    q2: '',
-    q3: '',
-    q4: '',
-    q5: '',
-    q6: '',
-    q7: '',
-  };
+  // colect answers
+  const [answers, setAnswers] = useState([
+    {q: 'q1', value: ''},
+    {q: 'q2', value: ''},
+    {q: 'q3', value: ''},
+    {q: 'q4', value: ''},
+    {q: 'q5', value: ''},
+    {q: 'q6', value: ''},
+    {q: 'q7', value: ''},
+  ]);
 
-
+  // store last clicked radio button and then pass to answers
   const [selected, setSelected] = useState({});
   const handleChange = (e) => {
     setSelected(e.target);
-    console.log(e.target);
   };
 
+  // for update answers
   useEffect(() => {
-
-    // console.log(selected.id);
-    // console.log(selected.value);
-    Object.keys(collectAnswers)
-      .forEach((key) => {
-        if(selected.id === key){
-          collectAnswers[key] = selected.value;
-        }
-      })
-
+    const newAns = answers.map(p =>
+        p.q === selected.id
+          ? { ...p, value: selected.value } : p
+    );
+    setAnswers(newAns);
   }, [selected]);
+
+  // support method - to observe what is storing to answers
+  const printCollect = () => {
+    let ul = document.querySelector("ul");
+    ul.innerHTML = "";
+    answers
+      .forEach((a) => {
+        ul.innerHTML += `<li>${a.q} : ${a.value}</li>`;
+      })
+  };
+
+  // for print updated collection of answers
+  useEffect(() => {
+    printCollect();
+  }, [answers])
+
+  // nav to TestResult page
+  let navigateTest = useNavigate();
 
   return (
     <Container className='h-100'>
       <div class="h-25"></div>
       <Row className="justify-content-md-center">
         <Col md="6">
-          <Form >
+          <Form onSubmit={() => navigateTest('/test')}>
             {data.questions.map( question => {
               return (
                 <Form.Group as={Row} className="mb-5" key={question.id} controlId={question.id} >
@@ -174,6 +189,8 @@ const FormRisk = () => {
               <Button className='align-middle' variant="primary" type="submit">
                 Zatwierdź
               </Button>
+              <p>{selected.id} : {selected.value}</p>
+              <ul></ul>
             </div>
           </Form>
         </Col>
