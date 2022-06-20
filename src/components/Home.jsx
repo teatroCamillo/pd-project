@@ -1,22 +1,16 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Footer from './Footer';
+import Header from './Header';
+
 
 const Home = () => {
   return (
-    <div>
-        <h1>Home</h1>
-        <nav
-            style={{
-                borderBottom: "solid 1px",
-                paddingBottom: "1rem",
-            }}
-            >
-            <Link to="/">Home</Link> |{" "}
-            <Link to="/login">Login</Link> |{" "}
-            <Link to="/test">Test</Link> |{" "}
-            <Link to="/risk">FormRisk</Link>
-        </nav>
-    </div>
+    <Container className='h-100'>
+      <Header/>
+      <h2>Home</h2>
+      <Footer/>
+    </Container>
   )
 }
 

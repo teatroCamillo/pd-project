@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Footer from './Footer';
+import Header from './Header';
 
 const FormRisk = () => {
 
@@ -130,14 +132,20 @@ const FormRisk = () => {
   }, [answers])
 
   // nav to TestResult page
-  let navigateTest = useNavigate();
+  //let navigateTest = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //() => navigateTest('/test')
+    console.log(answers);
+  }
 
   return (
     <Container className='h-100'>
-      <div class="h-25"></div>
+      <Header/>
       <Row className="justify-content-md-center">
-        <Col md="6">
-          <Form onSubmit={() => navigateTest('/test')}>
+        <Col className="bg-light text-dark rounded-4 p-4 shadow-lg" md="6">
+          <Form onSubmit={handleSubmit}>
             {data.questions.map( question => {
               return (
                 <Form.Group as={Row} className="mb-5" key={question.id} controlId={question.id} >
@@ -195,6 +203,7 @@ const FormRisk = () => {
           </Form>
         </Col>
       </Row>
+      <Footer/>
     </Container>
   )
 };
