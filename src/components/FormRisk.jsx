@@ -118,7 +118,7 @@ const FormRisk = () => {
 
   // support method - to observe what is storing to answers
   const printCollect = () => {
-    let ul = document.querySelector("ul");
+    let ul = document.querySelector(".res");
     ul.innerHTML = "";
     answers
       .forEach((a) => {
@@ -193,12 +193,12 @@ const FormRisk = () => {
               )
             })}
 
-            <div class="justify-content-center">
+            <div className="justify-content-center">
               <Button className='align-middle' variant="primary" type="submit">
                 Zatwierdź
               </Button>
               <p>{selected.id} : {selected.value}</p>
-              <ul></ul>
+              <ul className="res"></ul>
             </div>
           </Form>
         </Col>

@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import CustomLink from './CustomLink';
 
 const Header = () => {
+
+    const location = useLocation('');
+
   return (
     <Container className="h-25">
         <header>
@@ -15,11 +18,24 @@ const Header = () => {
                 }}
                 >
                 <Container className="justify-content-center">
-                    <Nav>
-                        <Nav.Link ><Link to="/">Home</Link></Nav.Link>
-                        <Nav.Link ><Link to="/login">Login</Link></Nav.Link>
-                        <Nav.Link ><Link to="/risk">FormRisk</Link></Nav.Link>
-                    </Nav>
+                    {location.pathname === "/" ?
+                    <nav>
+                        <ul>
+                            <CustomLink to="/login" >Login</CustomLink>
+                            <CustomLink to="/signup" >Sign up</CustomLink>
+                        </ul>
+                    </nav>
+                        :
+                    <nav>
+                        <ul>
+                            <CustomLink to="/" >Root</CustomLink>
+                            <CustomLink to="/home" >Home</CustomLink>
+                            <CustomLink to="/risk" >FormRisk</CustomLink>
+                        </ul>
+                        {/*<Nav.Link ><Link to="/">Root</Link></Nav.Link>
+                        <Nav.Link ><Link to="/home">Home</Link></Nav.Link>
+                        <Nav.Link ><Link to="/risk">FormRisk</Link></Nav.Link>*/}
+                    </nav>}
                 </Container>
             </Navbar>
         </header>

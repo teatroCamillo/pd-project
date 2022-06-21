@@ -1,21 +1,21 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Root from './components/Root';
 import FormRisk from './components/FormRisk';
 import Home from './components/Home';
 import Login from './components/Login';
-import TestResult from './components/TestResult';
+import Registration from './components/Registration';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/risk' element={<FormRisk />} />
-        <Route path='/test' element={<TestResult />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Root />} />
+      <Route path='/home' element={<Home />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/signup' element={<Registration />} />
+      <Route path='/risk' element={<FormRisk />} />
+    </Routes>
   );
 }
 
